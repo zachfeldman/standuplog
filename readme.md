@@ -6,13 +6,13 @@ StandUpLog is a short Ruby script meant to e-mail you a summary of the code you 
 1. [Sign up](http://sendgrid.com/) for a SendGrid developer account.
 2. Set the following environmental variables:
 
-
+```
 export SENDGRID_USERNAME=[your sendgrid username]
 export SENDGRID_API_KEY=[your sendgrid password]
 export STANDUPLOG_EMAIL=[email to send the log to]
 export STANDUPLOG_PATH=[path of your git repo]
 export STANDUPLOG_AUTHOR=[your git name, i.e. zachfeldman]
-
+```
 
 Have fun, feel free to fork and improve this is super basic.
 
