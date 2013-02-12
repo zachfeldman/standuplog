@@ -10,6 +10,7 @@ export SENDGRID_USERNAME=[your sendgrid username]
 export SENDGRID_API_KEY=[your sendgrid password]
 export STANDUPLOG_EMAIL=[email to send the log to]
 export STANDUPLOG_PATH=[path of your git repo]
+export STANDUPLOG_AUTHOR=[your git name, i.e. zachfeldman]
 
 Have fun, feel free to fork and improve this is super basic.
 

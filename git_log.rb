@@ -6,9 +6,9 @@ require 'uri'
 today = Time.now.strftime('%A')
 
 if today == "Monday"
-	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=zachfeldman --after={4.days.ago} --before={3.day.ago} --pretty=oneline`
+	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={4.days.ago} --before={3.day.ago} --pretty=oneline`
 else
-	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=zachfeldman --after={2.days.ago} --pretty=oneline`
+	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={2.days.ago} --pretty=oneline`
 end
 
 puts log
