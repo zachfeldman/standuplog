@@ -6,12 +6,22 @@ require 'uri'
 today = Time.now.strftime('%A')
 
 if today == "Monday"
-	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={4.days.ago} --before={3.day.ago} --pretty=oneline`
+	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={3.days.ago} --before={2.days.ago} --pretty=oneline`
 else
-	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={2.days.ago} --pretty=oneline`
+	log = `cd #{ENV['STANDUPLOG_PATH']} && git log --author=#{ENV['STANDUPLOG_AUTHOR']} --after={1.days.ago} --pretty=oneline`
 end
 
-puts log
+commits = log.split("\n")
+commits_pretty = ""
+commits.each do |commit|
+	commit_word_array = commit.split(" ")
+	commit_id = commit_word_array.first[0..7]
+	commit_word_array.delete_at(0)
+	final_message = "#{commit_id} - #{commit_word_array.join(" ")}\n\n"
+	commits_pretty = commits_pretty + final_message
+end
+	
+puts commits_pretty
 
 #setup the email
 api_user = ENV['SENDGRID_USERNAME'] 
@@ -19,7 +29,7 @@ api_key = ENV['SENDGRID_API_KEY']
 to = ENV['STANDUPLOG_EMAIL']
 to_name = "Zach Feldman"
 subject = "Day Before Git Log for #{Time.now.strftime('%m-%d-%Y')}"
-text = log
+text = commits_pretty
 from = "no-reply@standups.com"
 
 #send it using SendGrid RESTful API
